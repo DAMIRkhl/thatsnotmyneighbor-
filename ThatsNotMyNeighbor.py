@@ -2,6 +2,8 @@
 from constant import *
 import arcade
 
+from ponchocopay import OpenDoorsButtons
+
 
 class FirstGame(arcade.Window):
     def __init__(self, width, height):
@@ -15,9 +17,8 @@ class FirstGame(arcade.Window):
         self.max_offset_x = 300
         self.max_offset_y = 200
 
-        self.some_sprite = arcade.Sprite('buttons2.png', 2)
-        self.some_sprite.center_x = self.width / 2
-        self.some_sprite.center_y = self.height / 2
+        self.openclose = OpenDoorsButtons()
+        
 
     def on_draw(self):
         self.clear()
@@ -28,7 +29,7 @@ class FirstGame(arcade.Window):
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.BG)
 
-        # self.some_sprite.draw()
+        self.openclose.draw()
 
     def update(self, delta_time: float):
         pass
