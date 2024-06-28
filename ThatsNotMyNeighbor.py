@@ -2,6 +2,7 @@
 from constant import *
 import arcade
 
+from floors import Floor1, Floor2, Floor3
 from ponchocopay import OpenDoorsButtons
 
 
@@ -18,7 +19,9 @@ class FirstGame(arcade.Window):
         self.max_offset_y = 200
 
         self.openclose = OpenDoorsButtons()
-        
+        self.floor1=Floor1()
+        self.floor2=Floor2()
+        self.floor3=Floor3()
 
     def on_draw(self):
         self.clear()
@@ -30,6 +33,9 @@ class FirstGame(arcade.Window):
                                       self.width + 600, self.height + 400, self.BG)
 
         self.openclose.draw()
+        self.floor1.draw()
+        self.floor2.draw()
+        self.floor3.draw()
 
     def update(self, delta_time: float):
         pass
@@ -40,7 +46,6 @@ class FirstGame(arcade.Window):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.offset_x -= dx
         self.offset_y -= dy
-        print(dx,dy)
 
         if self.offset_x > self.max_offset_x:
             self.offset_x = self.max_offset_x
