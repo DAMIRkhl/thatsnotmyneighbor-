@@ -93,7 +93,20 @@ class FirstGame(arcade.Window):
                                           self.width - 100, self.height - 150, self.neighborsinfo)
 
     def update(self, delta_time: float):
-        pass
+        self.openclose.center_x = self.width / 0.90 + self.offset_x
+        self.openclose.center_y = self.height / 30 + self.offset_y
+        self.floor1.center_x = self.width / 0.957 + self.offset_x
+        self.floor1.center_y = self.height / 1.05 + self.offset_y
+        self.floor2.center_x = self.width / 0.957 + self.offset_x
+        self.floor2.center_y = self.height / 1.5 + self.offset_y
+        self.floor3.center_x = self.width / 0.957 + self.offset_x
+        self.floor3.center_y = self.height / 2.6 + self.offset_y
+        self.aristacratic.center_x = self.width / 2 + self.offset_x
+        self.aristacratic.center_y = self.height / 2 + self.offset_y
+
+    def on_key_press(self, symbol: int, modifiers: int):
+        if symbol == arcade.key.ESCAPE:
+            self.close()
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         if self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top:
@@ -128,3 +141,5 @@ class FirstGame(arcade.Window):
 
 window = FirstGame(SCREEN_WIDTH, SCREEN_HEIGHT)
 arcade.run()
+
+# чё пацаны аниме??😎 17.06.2024
