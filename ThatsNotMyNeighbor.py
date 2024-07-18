@@ -2,6 +2,7 @@ from constant import *
 import arcade
 
 from floors import Floor1, Floor2, Floor3
+from hucrechers import Humans
 from ponchocopay import OpenDoorsButtons
 
 
@@ -20,6 +21,50 @@ class FirstGame(arcade.Window):
         self.max_offset_y = 200
         self.opencloseF = False
 
+        self.aristacratic = Humans("Charecters/Aristacratic.webp",
+                                   ["Big nose", "Prominent mustache","Uses a monocle", "Wears a hat", "Round face"],
+                                   749468,
+                                   7777,
+                                   4,
+                                   3,
+                                   "aristacratism",
+                                   "Aristacratic")
+        self.fisryk = Humans("Charecters/image_2024-07-16_23-11-54.png",
+                             ["Red plaid button-up jacket", "White t-shirt with a blue peace sign",
+                              "Red and pink headband", "Long grey hair","Scraggly beard", "Round nose",
+                              "Eyes are two different sizes"],
+                             123678,
+                             5938,
+                             1,
+                             1, "pe_teacher",
+                             "Fisryk")
+        self.joe_biden = Humans("Charecters/Francis_Mosses.webp",
+                                ["Long nose", "Thin chin", "Tired eyes","Short hair", "Wears a hat"],
+                                656754,
+                                5836,
+                                3,
+                                3,
+                                "seamen",
+                                "Joe Biden")
+        self.the_fnaf_creator = Humans("Charecters/Dr._W._Afton.webp",
+                                       ["Robust eyebrows", "Wears glasses", "Short hair",
+                                        "Round nose", "Square head"],
+                                       856745,
+                                       9675,
+                                       2,
+                                       1,
+                                       "sret",
+                                       "Dr. W. Afton")
+        self.bob = Humans("Charecters/Angus_Ciprianni.webp",
+                          ["Long neck", "Wears a hat", "Has a moustache","Small eyes"],
+                          756954,
+                          6946,
+                          4,
+                          2,
+                          "Ofice job",
+                          "Bob")
+        # self.aristacratic.center_y = self.height // 2
+        # self.aristacratic.center_x = self.width // 2
 
         self.openclose = OpenDoorsButtons()
         self.floor1 = Floor1()
@@ -31,10 +76,10 @@ class FirstGame(arcade.Window):
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.officeBg)
+        self.aristacratic.draw()
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.BG)
-
 
         self.openclose.draw()
         self.floor1.draw()
@@ -43,27 +88,26 @@ class FirstGame(arcade.Window):
 
         if self.opencloseF == True:
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
-                                          self.width, self.height,self.darkness,alpha=65)
+                                          self.width, self.height, self.darkness, alpha=65)
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
-                                          self.width-100, self.height-150, self.neighborsinfo)
-
-
+                                          self.width - 100, self.height - 150, self.neighborsinfo)
 
     def update(self, delta_time: float):
         pass
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
-        if self.floor1.left<=x<=self.floor1.right and self.floor1.bottom<=y<=self.floor1.top:
+        if self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top:
             self.opencloseF = True
         if self.opencloseF:
-            if 515 <=x<= 557 and 761 <=y<= 803:
+            if 515 <= x <= 557 and 761 <= y <= 803:
                 self.opencloseF = False
 
-        if self.floor2.left<=x<=self.floor2.right and self.floor2.bottom<=y<=self.floor2.top:
+        if self.floor2.left <= x <= self.floor2.right and self.floor2.bottom <= y <= self.floor2.top:
             self.opencloseF = True
 
-        if self.floor3.left<=x<=self.floor3.right and self.floor3.bottom<=y<=self.floor3.top:
+        if self.floor3.left <= x <= self.floor3.right and self.floor3.bottom <= y <= self.floor3.top:
             self.opencloseF = True
+
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.offset_x -= dx
         self.offset_y -= dy
