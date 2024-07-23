@@ -63,6 +63,37 @@ class FirstGame(arcade.Window):
                           2,
                           "Ofice job",
                           "Bob")
+        self.Nacha = Humans(
+            human="Charecters/Nacha_Mikaelys.webp",
+            appearance=["Right eye blue", "Left eye green", "Curly hair", "She has freckles", "Round face",
+                        "Blue shirt & White collar", "Small eyes", "Hair bun", "Blue hairtie"],
+            ID=789653665413,
+            phone_number=1346,
+            apartment_number="3",
+            floor=1,
+            job="Chef",
+            name="Nacha Mikaelys"
+        )
+        self.Yog = Humans(
+            human="Charecters/Yog_Sothoth.webp",
+            appearance=["Long nose", "Nose Ring", "Shaded Eyes", "Short Hair", "Has Fangs"],
+            ID=689547464823,
+            phone_number=1346,
+            apartment_number="4",
+            floor=2,
+            job="Vampirism",
+            name="Yog Sothoth"
+        )
+        self.Person = Humans(
+            human="Charecters/Gloria_Schmicht.webp",
+            appearance=["Round face", "Mole on right cheek", "Short hair", "Round nose"],
+            ID="698522341150",
+            phone_number="5123",
+            apartment_number="1",
+            floor="2",
+            job="Banker",
+            name="Arnold Schmicht (Husband)",
+        )
         # self.aristacratic.center_y = self.height // 2
         # self.aristacratic.center_x = self.width // 2
 
