@@ -69,8 +69,8 @@ class FirstGame(arcade.Window):
                         "Blue shirt & White collar", "Small eyes", "Hair bun", "Blue hairtie"],
             ID=789653665413,
             phone_number=1346,
-            apartment_number="3",
-            floor=1,
+            apartment_number="2",
+            floor=2,
             job="Chef",
             name="Nacha Mikaelys"
         )
@@ -79,12 +79,12 @@ class FirstGame(arcade.Window):
             appearance=["Long nose", "Nose Ring", "Shaded Eyes", "Short Hair", "Has Fangs"],
             ID=689547464823,
             phone_number=1346,
-            apartment_number="4",
+            apartment_number="3",
             floor=2,
             job="Vampirism",
             name="Yog Sothoth"
         )
-        self.Person = Humans(
+        self.Gloria = Humans(
             human="Charecters/Gloria_Schmicht.webp",
             appearance=["Round face", "Mole on right cheek", "Short hair", "Round nose"],
             ID="698522341150",
@@ -92,8 +92,62 @@ class FirstGame(arcade.Window):
             apartment_number="1",
             floor="2",
             job="Banker",
-            name="Arnold Schmicht (Husband)",
+            name="Gloria Schmicht",
         )
+        self.Anastacha = Humans(
+            human="Charecters/Anastacha_Mikaelys.webp",
+            appearance=[
+                "Tired eyes", "Two ponytails", "Small nose", "Round face",
+                "Brown hair", "Blue hair ties", "White shirt with a blue collar", "Purple backpack"
+            ],
+            ID=132698534462,
+            phone_number=1346,
+            apartment_number="2",
+            floor=3,
+            job="Student",
+            name="Anastacha_Mikaelys"
+        )
+
+        self.Peache = Humans(
+            human="Charecters/Robertsky_Peachman.webp",
+            appearance=[
+                "Long neck", "Without eyebrows", "Big nose", "Has a goatee",
+                "Orange curly hair", "Small eyes", "Yellow shirt", "Blue ascot"
+            ],
+            ID=114652289730,
+            phone_number=2668,
+            apartment_number="4",
+            floor=1,
+            job="Shoemaker",
+            name="RobertskyPeachman",
+        )
+        self.Izaack = Humans(
+            human="Charecters/Izaack_Gauss.webp",
+            appearance=[
+                "Big eyebrows", "Big smile", "Prominent chin", "Big nose",
+                "Blue eyes", "Dark gray trench coat", "White shirt", "Dull blue necktie"
+            ],
+            ID=456985512369,
+            phone_number=7332,
+            apartment_number="3",
+            floor=1,
+            job="Reporter",
+            name="Izaack Gauss"
+                )
+        self.humans.append(self.fisryk)
+        self.humans.append(self.aristacratic)
+        self.humans.append(self.joe_biden)
+        self.humans.append(self.Afton)
+        self.humans.append(self.bob)
+        self.humans.append(self.Nacha)
+        self.humans.append(self.Yog)
+        self.humans.append(self.Gloria)
+        self.humans.append(self.Anastacha)
+        self.humans.append(self.Peache)
+        self.humans.append(self.Izaack)
+
+        self.humans[0].center_x = self.width // 2 - 50
+        self.humans[0].center_y = self.height // 2
         # self.aristacratic.center_y = self.height // 2
         # self.aristacratic.center_x = self.width // 2
 
@@ -107,7 +161,9 @@ class FirstGame(arcade.Window):
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.officeBg)
-        self.aristacratic.draw()
+
+        self.humans.draw()
+
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.BG)
