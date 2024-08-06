@@ -1,3 +1,5 @@
+import time
+
 from constant import *
 import arcade
 
@@ -9,60 +11,83 @@ from ponchocopay import OpenDoorsButtons
 class FirstGame(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height, fullscreen=True)
+
         self.BG = arcade.load_texture("Office.png")
         self.officeBg = arcade.load_texture("Office_Background.webp")
         self.neighborsinfo = arcade.load_texture("pixelcut-export-removebg-preview.png")
         self.darkness = arcade.load_texture("A_black_image.jpg")
+
         hurt_sound = arcade.load_sound("bg_sounds.wav")
         arcade.play_sound(hurt_sound)
+
+        self.humans=arcade.SpriteList()
+
+        self.folder_floor1 = False
+        self.folder_floor2 = False
+        self.folder_floor3 = False
+        self.current_flat = 1
+        self.opencloseF = False
+
         self.offset_x = 0
         self.offset_y = 0
         self.max_offset_x = 300
         self.max_offset_y = 200
-        self.opencloseF = False
 
-        self.aristacratic = Humans("Charecters/Aristacratic.webp",
-                                   ["Big nose", "Prominent mustache","Uses a monocle", "Wears a hat", "Round face"],
-                                   749468,
-                                   7777,
-                                   4,
-                                   3,
-                                   "aristacratism",
-                                   "Aristacratic")
-        self.fisryk = Humans("Charecters/image_2024-07-16_23-11-54.png",
-                             ["Red plaid button-up jacket", "White t-shirt with a blue peace sign",
-                              "Red and pink headband", "Long grey hair","Scraggly beard", "Round nose",
-                              "Eyes are two different sizes"],
-                             123678,
-                             5938,
-                             1,
-                             1, "pe_teacher",
-                             "Fisryk")
-        self.joe_biden = Humans("Charecters/Francis_Mosses.webp",
-                                ["Long nose", "Thin chin", "Tired eyes","Short hair", "Wears a hat"],
-                                656754,
-                                5836,
-                                3,
-                                3,
-                                "seamen",
-                                "Joe Biden")
-        self.the_fnaf_creator = Humans("Charecters/Dr._W._Afton.webp",
-                                       ["Robust eyebrows", "Wears glasses", "Short hair",
-                                        "Round nose", "Square head"],
-                                       856745,
-                                       9675,
-                                       2,
-                                       1,
-                                       "sret",
-                                       "Dr. W. Afton")
-        self.bob = Humans("Charecters/Angus_Ciprianni.webp",
-                          ["Long neck", "Wears a hat", "Has a moustache","Small eyes"],
-                          756954,
-                          6946,
-                          4,
-                          2,
-                          "Ofice job",
-                          "Bob")
+        self.aristacratic = Humans(
+            human="Charecters/Aristacratic.webp",
+            appearance=["Big nose", "Prominent mustache", "Uses a monocle", "Wears a hat", "Round face"],
+            ID=749468,
+            phone_number=7777,
+            apartment_number=4,
+            floor=3,
+            job="aristacratism",
+            name="Aristacratic"
+        )
+        self.fisryk = Humans(
+            human="Charecters/image_2024-07-16_23-11-54.png",
+            appearance=["Red plaid button-up jacket", "White t-shirt with a blue peace sign",
+                        "Red and pink headband", "Long grey hair", "Scraggly beard", "Round nose",
+                        "Eyes are two different sizes"],
+            ID=123678,
+            phone_number=5938,
+            apartment_number=1,
+            floor=1,
+            job="pe_teacher",
+            name="Fisryk"
+        )
+        self.joe_biden = Humans(
+            human="Charecters/Francis_Mosses.webp",
+            appearance=["Long nose", "Thin chin", "Tired eyes", "Short hair", "Wears a hat"],
+            ID=656754,
+            phone_number=5836,
+            apartment_number=3,
+            floor=3,
+            job="milkman",
+            name="Franis Mosses",
+            picture="Charecters/image.jpg"
+
+        )
+        self.Afton = Humans(
+            human="Charecters/Dr._W._Afton.webp",
+            appearance=["Robust eyebrows", "Wears glasses", "Short hair",
+                        "Round nose", "Square head"],
+            ID=856745,
+            phone_number=9675,
+            apartment_number=2,
+            floor=1,
+            job="sret",
+            name="Dr.W.Afton"
+        )
+        self.bob = Humans(
+            human="Charecters/Angus_Ciprianni.webp",
+            appearance=["Long neck", "Wears a hat", "Has a moustache", "Small eyes"],
+            ID=756954,
+            phone_number=6946,
+            apartment_number=4,
+            floor=2,
+            job="Ofice job",
+            name="Bob"
+        )
         self.Nacha = Humans(
             human="Charecters/Nacha_Mikaelys.webp",
             appearance=["Right eye blue", "Left eye green", "Curly hair", "She has freckles", "Round face",
@@ -134,6 +159,7 @@ class FirstGame(arcade.Window):
             job="Reporter",
             name="Izaack Gauss"
                 )
+
         self.humans.append(self.fisryk)
         self.humans.append(self.aristacratic)
         self.humans.append(self.joe_biden)
@@ -171,7 +197,7 @@ class FirstGame(arcade.Window):
         self.floor2.draw()
         self.floor3.draw()
 
-        if self.opencloseF == True:
+        if self.folder_floor1 :
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
                                           self.width, self.height, self.darkness, alpha=65)
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
@@ -179,6 +205,7 @@ class FirstGame(arcade.Window):
             arcade.draw_text(self.fisryk.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
 
     def update(self, delta_time: float):
+        # обновление координат для разных спрайтов
         self.openclose.center_x = self.width / 0.90 + self.offset_x
         self.openclose.center_y = self.height / 30 + self.offset_y
         self.floor1.center_x = self.width / 0.957 + self.offset_x
@@ -222,17 +249,17 @@ class FirstGame(arcade.Window):
             self.close()
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
+
         if self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top:
-            self.opencloseF = True
-        if self.opencloseF:
+            self.folder_floor1 = True
+        if self.floor2.left <= x <= self.floor2.right and self.floor2.bottom <= y <= self.floor2.top:
+            self.folder_floor2 = True
+        if self.floor3.left <= x <= self.floor3.right and self.floor3.bottom <= y <= self.floor3.top:
+            self.folder_floor3 = True
+
+        if self.opencloseF: # TODO: переделать
             if 515 <= x <= 557 and 761 <= y <= 803:
                 self.opencloseF = False
-
-        if self.floor2.left <= x <= self.floor2.right and self.floor2.bottom <= y <= self.floor2.top:
-            self.opencloseF = True
-
-        if self.floor3.left <= x <= self.floor3.right and self.floor3.bottom <= y <= self.floor3.top:
-            self.opencloseF = True
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.offset_x -= dx
@@ -256,3 +283,8 @@ window = FirstGame(SCREEN_WIDTH, SCREEN_HEIGHT)
 arcade.run()
 
 # чё пацаны аниме??😎 17.06.2024
+# ---------------------------------------------------- #
+"""
+todo: создать спрайлист и закинуть челов туда
+"""
+
