@@ -67,7 +67,7 @@ class FirstGame(arcade.Window):
             human="Charecters/Nacha_Mikaelys.webp",
             appearance=["Right eye blue", "Left eye green", "Curly hair", "She has freckles", "Round face",
                         "Blue shirt & White collar", "Small eyes", "Hair bun", "Blue hairtie"],
-            ID=789653665413,
+            ID=789653,
             phone_number=1346,
             apartment_number="2",
             floor=2,
@@ -77,7 +77,7 @@ class FirstGame(arcade.Window):
         self.Yog = Humans(
             human="Charecters/Yog_Sothoth.webp",
             appearance=["Long nose", "Nose Ring", "Shaded Eyes", "Short Hair", "Has Fangs"],
-            ID=689547464823,
+            ID=689547,
             phone_number=1346,
             apartment_number="3",
             floor=2,
@@ -87,7 +87,7 @@ class FirstGame(arcade.Window):
         self.Gloria = Humans(
             human="Charecters/Gloria_Schmicht.webp",
             appearance=["Round face", "Mole on right cheek", "Short hair", "Round nose"],
-            ID="698522341150",
+            ID=698522,
             phone_number="5123",
             apartment_number="1",
             floor="2",
@@ -100,7 +100,7 @@ class FirstGame(arcade.Window):
                 "Tired eyes", "Two ponytails", "Small nose", "Round face",
                 "Brown hair", "Blue hair ties", "White shirt with a blue collar", "Purple backpack"
             ],
-            ID=132698534462,
+            ID=132698,
             phone_number=1346,
             apartment_number="2",
             floor=3,
@@ -114,7 +114,7 @@ class FirstGame(arcade.Window):
                 "Long neck", "Without eyebrows", "Big nose", "Has a goatee",
                 "Orange curly hair", "Small eyes", "Yellow shirt", "Blue ascot"
             ],
-            ID=114652289730,
+            ID=114652,
             phone_number=2668,
             apartment_number="4",
             floor=1,
@@ -127,7 +127,7 @@ class FirstGame(arcade.Window):
                 "Big eyebrows", "Big smile", "Prominent chin", "Big nose",
                 "Blue eyes", "Dark gray trench coat", "White shirt", "Dull blue necktie"
             ],
-            ID=456985512369,
+            ID=456985,
             phone_number=7332,
             apartment_number="3",
             floor=1,
@@ -162,12 +162,10 @@ class FirstGame(arcade.Window):
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.officeBg)
 
-        self.humans.draw()
-
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.BG)
-
+        self.humans.draw()
         self.openclose.draw()
         self.floor1.draw()
         self.floor2.draw()
@@ -178,6 +176,7 @@ class FirstGame(arcade.Window):
                                           self.width, self.height, self.darkness, alpha=65)
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
                                           self.width - 100, self.height - 150, self.neighborsinfo)
+            arcade.draw_text(self.fisryk.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
 
     def update(self, delta_time: float):
         self.openclose.center_x = self.width / 0.90 + self.offset_x
@@ -188,8 +187,35 @@ class FirstGame(arcade.Window):
         self.floor2.center_y = self.height / 1.5 + self.offset_y
         self.floor3.center_x = self.width / 0.957 + self.offset_x
         self.floor3.center_y = self.height / 2.6 + self.offset_y
-        self.aristacratic.center_x = self.width / 2 + self.offset_x
+        self.aristacratic.center_x = self.width / 30 + self.offset_x
         self.aristacratic.center_y = self.height / 2 + self.offset_y
+        self.fisryk.center_x = self.width / 30 + self.offset_x
+        self.fisryk.center_y = self.height / 2 + self.offset_y
+        self.joe_biden.center_x = self.width / 30 + self.offset_x
+        self.joe_biden.center_y = self.height / 2 + self.offset_y
+        self.Afton.center_x = self.width / 30 + self.offset_x
+        self.Afton.center_y = self.height / 2 + self.offset_y
+        self.bob.center_x = self.width / 30 + self.offset_x
+        self.bob.center_y = self.height / 2 + self.offset_y
+        self.Nacha.center_x = self.width / 30 + self.offset_x
+        self.Nacha.center_y = self.height / 2 + self.offset_y
+        self.Yog.center_x = self.width / 30 + self.offset_x
+        self.Yog.center_y = self.height / 2 + self.offset_y
+        self.Gloria.center_x = self.width / 30 + self.offset_x
+        self.Gloria.center_y = self.height / 2 + self.offset_y
+        self.Anastacha.center_x = self.width / 30 + self.offset_x
+        self.Anastacha.center_y = self.height / 2 + self.offset_y
+        self.Peache.center_x = self.width / 30 + self.offset_x
+        self.Peache.center_y = self.height / 2 + self.offset_y
+        self.Izaack.center_x = self.width / 30 + self.offset_x
+        self.Izaack.center_y = self.height / 2 + self.offset_y
+
+        self.humans[0].update()
+        self.humans[0].move()
+        print(self.humans[0].center_x)
+
+        # if time.time() - self.timer > 2:
+        #     self.close()
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.ESCAPE:
