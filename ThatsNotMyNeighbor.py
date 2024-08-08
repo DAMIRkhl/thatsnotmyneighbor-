@@ -184,6 +184,8 @@ class FirstGame(arcade.Window):
         self.floor2 = Floor2()
         self.floor3 = Floor3()
 
+
+
     def on_draw(self):
         self.clear()
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
@@ -199,6 +201,9 @@ class FirstGame(arcade.Window):
         self.floor2.draw()
         self.floor3.draw()
 
+        # ---------------------------------------- этажи ---------------------------------------- #
+
+        # -------- первый этаж -------- #
         if self.folder_floor1 :
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
                                           self.width, self.height, self.darkness, alpha=65)
@@ -309,7 +314,7 @@ class FirstGame(arcade.Window):
 
         self.humans[0].update()
         self.humans[0].move()
-        print(self.humans[0].center_x)
+        # print(self.humans[0].center_x)
 
         # if time.time() - self.timer > 2:
         #     self.close()
@@ -319,6 +324,7 @@ class FirstGame(arcade.Window):
             self.close()
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
+        print(x, y)
 
         if self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top:
             self.folder_floor1 = True
@@ -327,9 +333,19 @@ class FirstGame(arcade.Window):
         if self.floor3.left <= x <= self.floor3.right and self.floor3.bottom <= y <= self.floor3.top:
             self.folder_floor3 = True
 
-        if self.opencloseF: # TODO: переделать
+        if self.folder_floor1 or self.folder_floor2 or self.folder_floor3:
             if 515 <= x <= 557 and 761 <= y <= 803:
-                self.opencloseF = False
+                self.folder_floor1 = False
+                self.folder_floor2 = False
+                self.folder_floor3 = False
+
+            # если открыт этаж, то выбираем конкретную квартиру
+            if 345 <= x <= 606 and 641 <= y <= 705:
+                self.current_fast = 1
+            elif 607 <= x <= 860 and 641 <= y <= 705:
+                self.current_flat = 2
+            elif 861 <= x <= 1115 and 641 <= y <= 705:
+                self.current_flast = 3
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.offset_x -= dx
@@ -355,6 +371,25 @@ arcade.run()
 # чё пацаны аниме??😎 17.06.2024
 # ---------------------------------------------------- #
 """
-todo: создать спрайлист и закинуть челов туда
+В отрисовку добавить всех остальных персонажей (надписи)
+
+
+345 641
+606 705
+604 637
+860 706
+855 640
+1115 704
+
+
+
+if 345 <= x <= 606 and 641 <= y <= 705:
+    self.current_fast = 1
+elif 607 <= x <= 860 and 641 <= y <= 705:
+    self.current_flat = 2
+elif 861 <= x <= 1115 and 641 <= y <= 705:
+    self.current_flast = 3
+
+
 """
 

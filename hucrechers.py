@@ -22,9 +22,9 @@ class Humans(arcade.Sprite):
         pass
 
     def update(self):
-        print(f'всем ку, я - {self.name}, change_x: {self.change_x}')
+        # print(f'всем ку, я - {self.name}, change_x: {self.change_x}')
         self.center_x += self.change_x
-        print(self.center_x, self.change_x, 'Center_x & change_x')
+        # print(self.center_x, self.change_x, 'Center_x & change_x')
 
     def move (self):
         self.change_x = 1
