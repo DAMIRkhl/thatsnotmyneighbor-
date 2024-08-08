@@ -14,7 +14,7 @@ class FirstGame(arcade.Window):
 
         self.BG = arcade.load_texture("Office.png")
         self.officeBg = arcade.load_texture("Office_Background.webp")
-        self.neighborsinfo = arcade.load_texture("pixelcut-export-removebg-preview.png")
+        self.neighborsinfo = arcade.load_texture("FO-removebg-preview.png")
         self.darkness = arcade.load_texture("A_black_image.jpg")
 
         hurt_sound = arcade.load_sound("bg_sounds.wav")
@@ -213,22 +213,26 @@ class FirstGame(arcade.Window):
             if self.current_flat == 1:
                 arcade.draw_text(self.fisryk.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
                 arcade.draw_text(self.fisryk.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.fisryk.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.fisryk.appearance)):
+                    arcade.draw_text(self.fisryk.appearance[i], 350, 135+25*i, font_size=17, color=arcade.color.BLACK)
 
             elif self.current_flat == 2:
                 arcade.draw_text(self.Afton.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
                 arcade.draw_text(self.Afton.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Afton.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Afton.appearance)):
+                    arcade.draw_text(self.Afton.appearance[i], 350, 135+30*i, font_size=20, color=arcade.color.BLACK)
 
             elif self.current_flat == 3:
                 arcade.draw_text(self.Izaack.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
                 arcade.draw_text(self.Izaack.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Izaack.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Izaack.appearance)):
+                    arcade.draw_text(self.Izaack.appearance[i], 350, 135+30*i, font_size=20, color=arcade.color.BLACK)
 
             elif self.current_flat == 4:
                 arcade.draw_text(self.Peache.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
                 arcade.draw_text(self.Peache.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Peache.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Peache.appearance)):
+                    arcade.draw_text(self.Peache.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
 
         # -------- второй этаж -------- #
         elif self.folder_floor2:
@@ -240,20 +244,25 @@ class FirstGame(arcade.Window):
             if self.current_flat == 1:
                 arcade.draw_text(self.Gloria.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.Gloria.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Gloria.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Gloria.appearance)):
+                    arcade.draw_text(self.Gloria.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
             elif self.current_flat == 2:
                 arcade.draw_text(self.Nacha.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.Nacha.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Nacha.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Nacha.appearance)):
+                    arcade.draw_text(self.Nacha.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
             elif self.current_flat == 3:
                 arcade.draw_text(self.Yog.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.Yog.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Yog.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Yog.appearance)):
+                    arcade.draw_text(self.Yog.appearance[i], 350, 275, font_size=20, color=arcade.color.BLACK)
 
             elif self.current_flat == 4:
                 arcade.draw_text(self.bob.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.bob.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.bob.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.bob.appearance)):
+                    arcade.draw_text(self.bob.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
+
         # -------- третий этаж -------- #
         elif self.folder_floor3:
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
@@ -264,7 +273,8 @@ class FirstGame(arcade.Window):
             if self.current_flat == 1:
                 arcade.draw_text(self.Anastacha.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.Anastacha.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Anastacha.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                for i in range(len(self.Anastacha.appearance)):
+                    arcade.draw_text(self.Anastacha.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
 
             elif self.current_flat == 2:
                 pass
@@ -273,11 +283,11 @@ class FirstGame(arcade.Window):
             elif self.current_flat == 3:
                 arcade.draw_text(self.joe_biden.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.joe_biden.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.joe_biden.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.joe_biden.appearance, 350, 275, font_size=20, color=arcade.color.BLACK)
             elif self.current_flat == 4:
                 arcade.draw_text(self.aristacratic.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.aristacratic.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.aristacratic.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.aristacratic.appearance, 350, 275, font_size=20, color=arcade.color.BLACK)
 
     def update(self, delta_time: float):
         # обновление координат для разных спрайтов
@@ -340,12 +350,14 @@ class FirstGame(arcade.Window):
                 self.folder_floor3 = False
 
             # если открыт этаж, то выбираем конкретную квартиру
-            if 345 <= x <= 606 and 641 <= y <= 705:
-                self.current_fast = 1
+            if 344 <= x <= 603 and 638 <= y <= 705:
+                self.current_flat = 1
             elif 607 <= x <= 860 and 641 <= y <= 705:
                 self.current_flat = 2
             elif 861 <= x <= 1115 and 641 <= y <= 705:
-                self.current_flast = 3
+                self.current_flat = 3
+            elif 1116 <= x <= 1367 and 641 <= y <= 705:
+                self.current_flat = 4
 
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.offset_x -= dx
@@ -392,4 +404,3 @@ elif 861 <= x <= 1115 and 641 <= y <= 705:
 
 
 """
-
