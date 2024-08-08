@@ -45,14 +45,16 @@ class FirstGame(arcade.Window):
         )
         self.fisryk = Humans(
             human="Charecters/image_2024-07-16_23-11-54.png",
-            appearance=["Red plaid button-up jacket", "White t-shirt with a blue peace sign",
-                        "Red and pink headband", "Long grey hair", "Scraggly beard", "Round nose",
+            appearance=["Red plaid button-up jacket",
+                        "White t-shirt with a blue peace sign",
+                        "Red and pink headband", "Long grey hair",
+                        "Scraggly beard", "Round nose",
                         "Eyes are two different sizes"],
             ID=123678,
             phone_number=5938,
             apartment_number=1,
             floor=1,
-            job="pe_teacher",
+            job="pe teacher",
             name="Fisryk"
         )
         self.joe_biden = Humans(
@@ -202,7 +204,75 @@ class FirstGame(arcade.Window):
                                           self.width, self.height, self.darkness, alpha=65)
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
                                           self.width - 100, self.height - 150, self.neighborsinfo)
-            arcade.draw_text(self.fisryk.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
+
+            if self.current_flat == 1:
+                arcade.draw_text(self.fisryk.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
+                arcade.draw_text(self.fisryk.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.fisryk.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+
+            elif self.current_flat == 2:
+                arcade.draw_text(self.Afton.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
+                arcade.draw_text(self.Afton.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Afton.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+
+            elif self.current_flat == 3:
+                arcade.draw_text(self.Izaack.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
+                arcade.draw_text(self.Izaack.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Izaack.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+
+            elif self.current_flat == 4:
+                arcade.draw_text(self.Peache.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
+                arcade.draw_text(self.Peache.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Peache.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+
+        # -------- второй этаж -------- #
+        elif self.folder_floor2:
+            arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
+                                          self.width, self.height, self.darkness, alpha=65)
+            arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
+                                          self.width - 100, self.height - 150, self.neighborsinfo)
+
+            if self.current_flat == 1:
+                arcade.draw_text(self.Gloria.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Gloria.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Gloria.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+            elif self.current_flat == 2:
+                arcade.draw_text(self.Nacha.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Nacha.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Nacha.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+            elif self.current_flat == 3:
+                arcade.draw_text(self.Yog.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Yog.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Yog.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+
+            elif self.current_flat == 4:
+                arcade.draw_text(self.bob.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.bob.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.bob.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+        # -------- третий этаж -------- #
+        elif self.folder_floor3:
+            arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
+                                          self.width, self.height, self.darkness, alpha=65)
+            arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
+                                          self.width - 100, self.height - 150, self.neighborsinfo)
+
+            if self.current_flat == 1:
+                arcade.draw_text(self.Anastacha.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Anastacha.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.Anastacha.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+
+            elif self.current_flat == 2:
+                pass
+
+
+            elif self.current_flat == 3:
+                arcade.draw_text(self.joe_biden.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.joe_biden.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.joe_biden.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
+            elif self.current_flat == 4:
+                arcade.draw_text(self.aristacratic.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.aristacratic.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+                arcade.draw_text(self.aristacratic.appearance, 350, 275, font_size=30, color=arcade.color.BLACK)
 
     def update(self, delta_time: float):
         # обновление координат для разных спрайтов
