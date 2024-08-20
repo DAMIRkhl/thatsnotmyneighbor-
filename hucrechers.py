@@ -26,7 +26,7 @@ class Humans(arcade.Sprite):
         self.center_x += self.change_x
         # print(self.center_x, self.change_x, 'Center_x & change_x')
 
-    def move (self):
+    def move_to_center(self):
         self.change_x = 1
 
     def stop_mid (self):

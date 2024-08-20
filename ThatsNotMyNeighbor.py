@@ -12,16 +12,22 @@ class FirstGame(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height, fullscreen=True)
 
+        # textures
         self.BG = arcade.load_texture("Office.png")
         self.officeBg = arcade.load_texture("Office_Background.webp")
         self.neighborsinfo = arcade.load_texture("FO-removebg-preview.png")
         self.darkness = arcade.load_texture("A_black_image.jpg")
 
-        hurt_sound = arcade.load_sound("bg_sounds.wav")
-        arcade.play_sound(hurt_sound)
+        # sprite lists
+        self.humans = arcade.SpriteList()
 
-        self.humans=arcade.SpriteList()
+        # sprites
+        self.openclose = OpenDoorsButtons()
+        self.floor1 = Floor1()
+        self.floor2 = Floor2()
+        self.floor3 = Floor3()
 
+        # states and etc
         self.folder_floor1 = False
         self.folder_floor2 = False
         self.folder_floor3 = False
@@ -33,6 +39,13 @@ class FirstGame(arcade.Window):
         self.max_offset_x = 300
         self.max_offset_y = 200
 
+        # sounds
+        hurt_sound = arcade.load_sound("bg_sounds.wav")
+        arcade.play_sound(hurt_sound)
+
+        self.create_people()
+
+    def create_people(self):
         self.aristacratic = Humans(
             human="Charecters/Aristacratic.webp",
             appearance=["Big nose", "Prominent mustache", "Uses a monocle", "Wears a hat", "Round face"],
@@ -41,7 +54,8 @@ class FirstGame(arcade.Window):
             apartment_number=4,
             floor=3,
             job="aristacratism",
-            name="Aristacratic"
+            name="Aristacratic",
+            picture='Charecters/download__5_-removebg-preview.png',
         )
         self.fisryk = Humans(
             human="Charecters/image_2024-07-16_23-11-54.png",
@@ -55,8 +69,10 @@ class FirstGame(arcade.Window):
             apartment_number=1,
             floor=1,
             job="pe teacher",
-            name="Fisryk"
+            name="Fisryk",
+            picture='buttons2.png'
         )
+
         self.joe_biden = Humans(
             human="Charecters/Francis_Mosses.webp",
             appearance=["Long nose", "Thin chin", "Tired eyes", "Short hair", "Wears a hat"],
@@ -68,6 +84,7 @@ class FirstGame(arcade.Window):
             name="Franis Mosses",
             picture='Charecters/image-removebg-preview.png'
         )
+
         self.Afton = Humans(
             human="Charecters/Dr._W._Afton.webp",
             appearance=["Robust eyebrows", "Wears glasses", "Short hair",
@@ -77,8 +94,10 @@ class FirstGame(arcade.Window):
             apartment_number=2,
             floor=1,
             job="sret",
-            name="Dr.W.Afton"
+            name="Dr.W.Afton",
+            picture='Charecters/download-removebg-preview (1).png'
         )
+
         self.bob = Humans(
             human="Charecters/Angus_Ciprianni.webp",
             appearance=["Long neck", "Wears a hat", "Has a moustache", "Small eyes"],
@@ -87,8 +106,10 @@ class FirstGame(arcade.Window):
             apartment_number=4,
             floor=2,
             job="Ofice job",
-            name="Bob"
+            name="Bob",
+            picture='Charecters/download__2_-removebg-preview.png'
         )
+
         self.Nacha = Humans(
             human="Charecters/Nacha_Mikaelys.webp",
             appearance=["Right eye blue", "Left eye green", "Curly hair", "She has freckles", "Round face",
@@ -98,8 +119,10 @@ class FirstGame(arcade.Window):
             apartment_number="2",
             floor=2,
             job="Chef",
-            name="Nacha Mikaelys"
+            name="Nacha Mikaelys",
+            picture='Charecters/download__1_-removebg-preview.png'
         )
+
         self.Yog = Humans(
             human="Charecters/Yog_Sothoth.webp",
             appearance=["Long nose", "Nose Ring", "Shaded Eyes", "Short Hair", "Has Fangs"],
@@ -108,8 +131,10 @@ class FirstGame(arcade.Window):
             apartment_number="3",
             floor=2,
             job="Vampirism",
-            name="Yog Sothoth"
+            name="Yog Sothoth",
+            picture='Charecters/Yog_Sothoth.webp'
         )
+
         self.Gloria = Humans(
             human="Charecters/Gloria_Schmicht.webp",
             appearance=["Round face", "Mole on right cheek", "Short hair", "Round nose"],
@@ -119,7 +144,9 @@ class FirstGame(arcade.Window):
             floor="2",
             job="Banker",
             name="Gloria Schmicht",
+            picture='Charecters/download-removebg-preview (2).png'
         )
+
         self.Anastacha = Humans(
             human="Charecters/Anastacha_Mikaelys.webp",
             appearance=[
@@ -131,7 +158,8 @@ class FirstGame(arcade.Window):
             apartment_number="2",
             floor=3,
             job="Student",
-            name="Anastacha_Mikaelys"
+            name="Anastacha Mikaelys",
+            picture='Charecters/download__4_-removebg-preview.png'
         )
 
         self.Peache = Humans(
@@ -145,8 +173,10 @@ class FirstGame(arcade.Window):
             apartment_number="4",
             floor=1,
             job="Shoemaker",
-            name="RobertskyPeachman",
+            name="Robertsky Peachman",
+            picture='Charecters/download-removebg-preview (4).png'
         )
+
         self.Izaack = Humans(
             human="Charecters/Izaack_Gauss.webp",
             appearance=[
@@ -158,8 +188,9 @@ class FirstGame(arcade.Window):
             apartment_number="3",
             floor=1,
             job="Reporter",
-            name="Izaack Gauss"
-                )
+            name="Izaack Gauss",
+            picture='Charecters/download__1_-removebg-preview (2).png'
+        )
 
         self.humans.append(self.fisryk)
         self.humans.append(self.aristacratic)
@@ -173,28 +204,32 @@ class FirstGame(arcade.Window):
         self.humans.append(self.Peache)
         self.humans.append(self.Izaack)
 
-        self.humans[0].center_x = self.width // 2 - 50
+        self.humans[0].center_x = 0
         self.humans[0].center_y = self.height // 2
-        # self.aristacratic.center_y = self.height // 2
-        # self.aristacratic.center_x = self.width // 2
-
-        self.openclose = OpenDoorsButtons()
-        self.floor1 = Floor1()
-        self.floor2 = Floor2()
-        self.floor3 = Floor3()
 
 
+    def draw_info_neighbor(self, person: Humans, distance_text: int, font_size: int):
+        """Рисует инфу о соседях в папках с этажами"""
+
+        arcade.draw_text(person.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
+        arcade.draw_text(person.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
+
+        for i in range(len(person.appearance)):
+            arcade.draw_text(person.appearance[i], 350, 135 + distance_text * i, font_size=font_size, color=arcade.color.BLACK)
+        arcade.draw_texture_rectangle(280, 320, person.picture.width * 2.5, person.picture.height * 2.5, person.picture)
 
     def on_draw(self):
         self.clear()
+
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.officeBg)
 
+        self.humans.draw()
+
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.BG)
-        self.humans.draw()
         self.openclose.draw()
         self.floor1.draw()
         self.floor2.draw()
@@ -210,24 +245,13 @@ class FirstGame(arcade.Window):
                                           self.width - 100, self.height - 150, self.neighborsinfo)
 
             if self.current_flat == 1:
-                arcade.draw_text(self.fisryk.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
-                arcade.draw_text(self.fisryk.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.fisryk.appearance)):
-                    arcade.draw_text(self.fisryk.appearance[i], 350, 135+25*i, font_size=17, color=arcade.color.BLACK)
-
+                self.draw_info_neighbor(self.fisryk, 25, 17)
             elif self.current_flat == 2:
                 self.draw_info_neighbor(self.Afton, 30, 20)
             elif self.current_flat == 3:
-                arcade.draw_text(self.Izaack.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
-                arcade.draw_text(self.Izaack.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Izaack.appearance)):
-                    arcade.draw_text(self.Izaack.appearance[i], 350, 135+30*i, font_size=20, color=arcade.color.BLACK)
-
+                self.draw_info_neighbor(self.Izaack, 30, 20)
             elif self.current_flat == 4:
-                arcade.draw_text(self.Peache.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
-                arcade.draw_text(self.Peache.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Peache.appearance)):
-                    arcade.draw_text(self.Peache.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
+                self.draw_info_neighbor(self.Peache, 25, 20)
 
         # -------- второй этаж -------- #
         elif self.folder_floor2:
@@ -237,23 +261,13 @@ class FirstGame(arcade.Window):
                                           self.width - 100, self.height - 150, self.neighborsinfo)
 
             if self.current_flat == 1:
-                arcade.draw_text(self.Gloria.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Gloria.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Gloria.appearance)):
-                    arcade.draw_text(self.Gloria.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
+                self.draw_info_neighbor(self.Gloria, 25, 20)
             elif self.current_flat == 2:
                 self.draw_info_neighbor(self.Nacha, 22, 16)
             elif self.current_flat == 3:
-                arcade.draw_text(self.Yog.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Yog.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Yog.appearance)):
-                    arcade.draw_text(self.Yog.appearance[i], 350, 275, font_size=20, color=arcade.color.BLACK)
-
+                self.draw_info_neighbor(self.Yog, 25, 20)
             elif self.current_flat == 4:
-                arcade.draw_text(self.bob.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.bob.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.bob.appearance)):
-                    arcade.draw_text(self.bob.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
+                self.draw_info_neighbor(self.bob, 25, 20)
 
         # -------- третий этаж -------- #
         elif self.folder_floor3:
@@ -263,19 +277,11 @@ class FirstGame(arcade.Window):
                                           self.width - 100, self.height - 150, self.neighborsinfo)
 
             if self.current_flat == 1:
-                arcade.draw_text(self.Anastacha.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Anastacha.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Anastacha.appearance)):
-                    arcade.draw_text(self.Anastacha.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
-
+                self.draw_info_neighbor(self.Anastacha, 25, 20)
             elif self.current_flat == 2:
-                pass
-
-
+                pass    # ПУСТАЯ ХАТА, НЕ ЗАНИМАТЬ!!!
             elif self.current_flat == 3:
-                arcade.draw_text(self.joe_biden.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.joe_biden.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.joe_biden.appearance, 350, 275, font_size=20, color=arcade.color.BLACK)
+                self.draw_info_neighbor(self.joe_biden, 25, 20)
             elif self.current_flat == 4:
                 self.draw_info_neighbor(self.aristacratic, 25, 20)
 
@@ -289,35 +295,34 @@ class FirstGame(arcade.Window):
         self.floor2.center_y = self.height / 1.5 + self.offset_y
         self.floor3.center_x = self.width / 0.957 + self.offset_x
         self.floor3.center_y = self.height / 2.6 + self.offset_y
-        self.aristacratic.center_x = self.width / 30 + self.offset_x
-        self.aristacratic.center_y = self.height / 2 + self.offset_y
-        self.fisryk.center_x = self.width / 30 + self.offset_x
-        self.fisryk.center_y = self.height / 2 + self.offset_y
-        self.joe_biden.center_x = self.width / 30 + self.offset_x
-        self.joe_biden.center_y = self.height / 2 + self.offset_y
-        self.Afton.center_x = self.width / 30 + self.offset_x
-        self.Afton.center_y = self.height / 2 + self.offset_y
-        self.bob.center_x = self.width / 30 + self.offset_x
-        self.bob.center_y = self.height / 2 + self.offset_y
-        self.Nacha.center_x = self.width / 30 + self.offset_x
-        self.Nacha.center_y = self.height / 2 + self.offset_y
-        self.Yog.center_x = self.width / 30 + self.offset_x
-        self.Yog.center_y = self.height / 2 + self.offset_y
-        self.Gloria.center_x = self.width / 30 + self.offset_x
-        self.Gloria.center_y = self.height / 2 + self.offset_y
-        self.Anastacha.center_x = self.width / 30 + self.offset_x
-        self.Anastacha.center_y = self.height / 2 + self.offset_y
-        self.Peache.center_x = self.width / 30 + self.offset_x
-        self.Peache.center_y = self.height / 2 + self.offset_y
-        self.Izaack.center_x = self.width / 30 + self.offset_x
-        self.Izaack.center_y = self.height / 2 + self.offset_y
+        # self.aristacratic.center_x = self.width / 30 + self.offset_x
+        # self.aristacratic.center_y = self.height / 2 + self.offset_y
+        # self.fisryk.center_x = self.width / 30 + self.offset_x
+        # self.fisryk.center_y = self.height / 2 + self.offset_y
+        # self.joe_biden.center_x = self.width / 30 + self.offset_x
+        # self.joe_biden.center_y = self.height / 2 + self.offset_y
+        # self.Afton.center_x = self.width / 30 + self.offset_x
+        # self.Afton.center_y = self.height / 2 + self.offset_y
+        # self.bob.center_x = self.width / 30 + self.offset_x
+        # self.bob.center_y = self.height / 2 + self.offset_y
+        # self.Nacha.center_x = self.width / 30 + self.offset_x
+        # self.Nacha.center_y = self.height / 2 + self.offset_y
+        # self.Yog.center_x = self.width / 30 + self.offset_x
+        # self.Yog.center_y = self.height / 2 + self.offset_y
+        # self.Gloria.center_x = self.width / 30 + self.offset_x
+        # self.Gloria.center_y = self.height / 2 + self.offset_y
+        # self.Anastacha.center_x = self.width / 30 + self.offset_x
+        # self.Anastacha.center_y = self.height / 2 + self.offset_y
+        # self.Peache.center_x = self.width / 30 + self.offset_x
+        # self.Peache.center_y = self.height / 2 + self.offset_y
+        # self.Izaack.center_x = self.width / 30 + self.offset_x
+        # self.Izaack.center_y = self.height / 2 + self.offset_y
 
-        self.humans[0].update()
-        self.humans[0].move()
+        # self.humans[0].update()
+        # self.humans[0].move_to_center()
+        # self.humans[0].center_y = self.height // 2 + self.offset_y
+        # self.humans[0].center_x = self.humans[0].center_x + self.offset_x
         # print(self.humans[0].center_x)
-
-        # if time.time() - self.timer > 2:
-        #     self.close()
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.ESCAPE:
@@ -325,6 +330,7 @@ class FirstGame(arcade.Window):
 
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         print(x, y)
+        print(all([self.folder_floor1, self.folder_floor2, self.folder_floor3]))
 
         if (self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top and
                 not any([self.folder_floor1,self.folder_floor2,self.folder_floor3])):
@@ -336,7 +342,7 @@ class FirstGame(arcade.Window):
                 not any([self.folder_floor1,self.folder_floor2,self.folder_floor3])):
             self.folder_floor3 = True
 
-        if self.folder_floor1 or self.folder_floor2 or self.folder_floor3:
+        if self.folder_floor1 or self.folder_floor2 or self.folder_floor3:  # нажатие на крестик в этажах
             if 515 <= x <= 557 and 761 <= y <= 803:
                 self.folder_floor1 = False
                 self.folder_floor2 = False
@@ -376,24 +382,6 @@ arcade.run()
 # чё пацаны аниме??😎 17.06.2024
 # ---------------------------------------------------- #
 """
-В отрисовку добавить всех остальных персонажей (надписи)
-
-
-345 641
-606 705
-604 637
-860 706
-855 640
-1115 704
-
-
-
-if 345 <= x <= 606 and 641 <= y <= 705:
-    self.current_fast = 1
-elif 607 <= x <= 860 and 641 <= y <= 705:
-    self.current_flat = 2
-elif 861 <= x <= 1115 and 641 <= y <= 705:
-    self.current_flast = 3
 
 
 """
