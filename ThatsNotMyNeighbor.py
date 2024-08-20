@@ -66,8 +66,7 @@ class FirstGame(arcade.Window):
             floor=3,
             job="milkman",
             name="Franis Mosses",
-            picture="Charecters/image.jpg"
-
+            picture='Charecters/image-removebg-preview.png'
         )
         self.Afton = Humans(
             human="Charecters/Dr._W._Afton.webp",
@@ -217,11 +216,7 @@ class FirstGame(arcade.Window):
                     arcade.draw_text(self.fisryk.appearance[i], 350, 135+25*i, font_size=17, color=arcade.color.BLACK)
 
             elif self.current_flat == 2:
-                arcade.draw_text(self.Afton.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
-                arcade.draw_text(self.Afton.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Afton.appearance)):
-                    arcade.draw_text(self.Afton.appearance[i], 350, 135+30*i, font_size=20, color=arcade.color.BLACK)
-
+                self.draw_info_neighbor(self.Afton, 30, 20)
             elif self.current_flat == 3:
                 arcade.draw_text(self.Izaack.phone_number,825,590,font_size=30,color=arcade.color.BLACK)
                 arcade.draw_text(self.Izaack.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
@@ -247,10 +242,7 @@ class FirstGame(arcade.Window):
                 for i in range(len(self.Gloria.appearance)):
                     arcade.draw_text(self.Gloria.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
             elif self.current_flat == 2:
-                arcade.draw_text(self.Nacha.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.Nacha.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                for i in range(len(self.Nacha.appearance)):
-                    arcade.draw_text(self.Nacha.appearance[i], 350, 135+25*i, font_size=20, color=arcade.color.BLACK)
+                self.draw_info_neighbor(self.Nacha, 22, 16)
             elif self.current_flat == 3:
                 arcade.draw_text(self.Yog.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.Yog.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
@@ -285,9 +277,7 @@ class FirstGame(arcade.Window):
                 arcade.draw_text(self.joe_biden.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
                 arcade.draw_text(self.joe_biden.appearance, 350, 275, font_size=20, color=arcade.color.BLACK)
             elif self.current_flat == 4:
-                arcade.draw_text(self.aristacratic.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.aristacratic.ID, 700, 470, font_size=30, color=arcade.color.BLACK)
-                arcade.draw_text(self.aristacratic.appearance, 350, 275, font_size=20, color=arcade.color.BLACK)
+                self.draw_info_neighbor(self.aristacratic, 25, 20)
 
     def update(self, delta_time: float):
         # обновление координат для разных спрайтов
@@ -336,11 +326,14 @@ class FirstGame(arcade.Window):
     def on_mouse_press(self, x: int, y: int, button: int, modifiers: int):
         print(x, y)
 
-        if self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top:
+        if (self.floor1.left <= x <= self.floor1.right and self.floor1.bottom <= y <= self.floor1.top and
+                not any([self.folder_floor1,self.folder_floor2,self.folder_floor3])):
             self.folder_floor1 = True
-        if self.floor2.left <= x <= self.floor2.right and self.floor2.bottom <= y <= self.floor2.top:
+        if (self.floor2.left <= x <= self.floor2.right and self.floor2.bottom <= y <= self.floor2.top and
+                not any([self.folder_floor1,self.folder_floor2,self.folder_floor3])):
             self.folder_floor2 = True
-        if self.floor3.left <= x <= self.floor3.right and self.floor3.bottom <= y <= self.floor3.top:
+        if (self.floor3.left <= x <= self.floor3.right and self.floor3.bottom <= y <= self.floor3.top and
+                not any([self.folder_floor1,self.folder_floor2,self.folder_floor3])):
             self.folder_floor3 = True
 
         if self.folder_floor1 or self.folder_floor2 or self.folder_floor3:

@@ -2,7 +2,7 @@ import arcade
 
 
 class Humans(arcade.Sprite):
-    def __init__(self, human, appearance, ID, phone_number, apartment_number, floor, job, name,picture ="Charecters/image.jpg", scale=0.5):
+    def __init__(self, human, appearance, ID, phone_number, apartment_number, floor, job, name,picture ="Charecters/download__1_-removebg-preview.png", scale=0.5):
         super().__init__(filename=human, scale=scale)
         self.appearance = appearance
         self.human = human
