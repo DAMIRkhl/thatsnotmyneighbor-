@@ -6,17 +6,20 @@ import arcade
 from floors import Floor1, Floor2, Floor3
 from hucrechers import Humans
 from ponchocopay import OpenDoorsButtons
+from cursor import *
 
 
 class FirstGame(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height, fullscreen=True)
-
+        self.set_mouse_visible(False)
         # textures
         self.BG = arcade.load_texture("Office.png")
         self.officeBg = arcade.load_texture("Office_Background.webp")
         self.neighborsinfo = arcade.load_texture("FO-removebg-preview.png")
         self.darkness = arcade.load_texture("A_black_image.jpg")
+        self.neighborsinfo2 = arcade.load_texture("FO2-removebg-preview.png")
+        self.neighborsinfo3 = arcade.load_texture("FO3-removebg-preview.png")
 
         # sprite lists
         self.humans = arcade.SpriteList()
@@ -26,6 +29,7 @@ class FirstGame(arcade.Window):
         self.floor1 = Floor1()
         self.floor2 = Floor2()
         self.floor3 = Floor3()
+        self.cursor = Cursor()
 
         # states and etc
         self.folder_floor1 = False
@@ -70,7 +74,7 @@ class FirstGame(arcade.Window):
             floor=1,
             job="pe teacher",
             name="Fisryk",
-            picture='buttons2.png'
+            picture='Charecters/imageedit_2_9768164024 (1).png'
         )
 
         self.joe_biden = Humans(
@@ -112,7 +116,7 @@ class FirstGame(arcade.Window):
 
         self.Nacha = Humans(
             human="Charecters/Nacha_Mikaelys.webp",
-            appearance=["Right eye blue", "Left eye green", "Curly hair", "She has freckles", "Round face",
+            appearance=["Right eye blue", "Die", "Curly hair", "She has freckles", "Round face",
                         "Blue shirt & White collar", "Small eyes", "Hair bun", "Blue hairtie"],
             ID=789653,
             phone_number=1346,
@@ -166,7 +170,7 @@ class FirstGame(arcade.Window):
             human="Charecters/Robertsky_Peachman.webp",
             appearance=[
                 "Long neck", "Without eyebrows", "Big nose", "Has a goatee",
-                "Orange curly hair", "Small eyes", "Yellow shirt", "Blue ascot"
+                "Orange curly hair", "Small eyes"
             ],
             ID=114652,
             phone_number=2668,
@@ -180,8 +184,8 @@ class FirstGame(arcade.Window):
         self.Izaack = Humans(
             human="Charecters/Izaack_Gauss.webp",
             appearance=[
-                "Big eyebrows", "Big smile", "Prominent chin", "Big nose",
-                "Blue eyes", "Dark gray trench coat", "White shirt", "Dull blue necktie"
+                "Big smile", "Prominent chin", "Big nose",
+                "Blue eyes", "White shirt"
             ],
             ID=456985,
             phone_number=7332,
@@ -208,7 +212,7 @@ class FirstGame(arcade.Window):
         self.humans[0].center_y = self.height // 2
 
 
-    def draw_info_neighbor(self, person: Humans, distance_text: int, font_size: int):
+    def draw_info_neighbor(self, person: Humans, distance_text: int, font_size: int ,multiply:float=2.5,place_picx:int=280,place_picy:int=320):
         """Рисует инфу о соседях в папках с этажами"""
 
         arcade.draw_text(person.phone_number, 825, 590, font_size=30, color=arcade.color.BLACK)
@@ -216,7 +220,7 @@ class FirstGame(arcade.Window):
 
         for i in range(len(person.appearance)):
             arcade.draw_text(person.appearance[i], 350, 135 + distance_text * i, font_size=font_size, color=arcade.color.BLACK)
-        arcade.draw_texture_rectangle(280, 320, person.picture.width * 2.5, person.picture.height * 2.5, person.picture)
+        arcade.draw_texture_rectangle(place_picx, place_picy, person.picture.width * multiply, person.picture.height * multiply, person.picture)
 
     def on_draw(self):
         self.clear()
@@ -230,10 +234,13 @@ class FirstGame(arcade.Window):
         arcade.draw_texture_rectangle(self.width / 2 + self.offset_x,
                                       self.height / 2 + self.offset_y,
                                       self.width + 600, self.height + 400, self.BG)
+
         self.openclose.draw()
         self.floor1.draw()
         self.floor2.draw()
         self.floor3.draw()
+
+
 
         # ---------------------------------------- этажи ---------------------------------------- #
 
@@ -245,23 +252,23 @@ class FirstGame(arcade.Window):
                                           self.width - 100, self.height - 150, self.neighborsinfo)
 
             if self.current_flat == 1:
-                self.draw_info_neighbor(self.fisryk, 25, 17)
+                self.draw_info_neighbor(self.fisryk, 25, 17,multiply=0.7,place_picx=425,place_picy=500)
             elif self.current_flat == 2:
                 self.draw_info_neighbor(self.Afton, 30, 20)
             elif self.current_flat == 3:
                 self.draw_info_neighbor(self.Izaack, 30, 20)
             elif self.current_flat == 4:
-                self.draw_info_neighbor(self.Peache, 25, 20)
+                self.draw_info_neighbor(self.Peache, 30, 20)
 
         # -------- второй этаж -------- #
         elif self.folder_floor2:
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
                                           self.width, self.height, self.darkness, alpha=65)
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
-                                          self.width - 100, self.height - 150, self.neighborsinfo)
+                                          self.width - 100, self.height - 150, self.neighborsinfo2)
 
             if self.current_flat == 1:
-                self.draw_info_neighbor(self.Gloria, 25, 20)
+                self.draw_info_neighbor(self.Gloria, 35, 20)
             elif self.current_flat == 2:
                 self.draw_info_neighbor(self.Nacha, 22, 16)
             elif self.current_flat == 3:
@@ -274,7 +281,7 @@ class FirstGame(arcade.Window):
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
                                           self.width, self.height, self.darkness, alpha=65)
             arcade.draw_texture_rectangle(self.width / 2, self.height / 2,
-                                          self.width - 100, self.height - 150, self.neighborsinfo)
+                                          self.width - 100, self.height - 150, self.neighborsinfo3)
 
             if self.current_flat == 1:
                 self.draw_info_neighbor(self.Anastacha, 25, 20)
@@ -284,6 +291,7 @@ class FirstGame(arcade.Window):
                 self.draw_info_neighbor(self.joe_biden, 25, 20)
             elif self.current_flat == 4:
                 self.draw_info_neighbor(self.aristacratic, 25, 20)
+        self.cursor.draw()
 
     def update(self, delta_time: float):
         # обновление координат для разных спрайтов
@@ -361,6 +369,9 @@ class FirstGame(arcade.Window):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.offset_x -= dx
         self.offset_y -= dy
+
+        self.cursor.center_x = x +3
+        self.cursor.center_y = y-11
 
         if self.offset_x > self.max_offset_x:
             self.offset_x = self.max_offset_x
