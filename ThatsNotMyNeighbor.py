@@ -37,6 +37,7 @@ class FirstGame(arcade.Window):
         self.folder_floor3 = False
         self.current_flat = 1
         self.opencloseF = False
+        self.character_moving = True
 
         self.offset_x = 0
         self.offset_y = 0
@@ -46,6 +47,9 @@ class FirstGame(arcade.Window):
         # sounds
         hurt_sound = arcade.load_sound("bg_sounds.wav")
         arcade.play_sound(hurt_sound)
+
+        # timers
+        self.cooldown_moving = time.time()
 
         self.create_people()
 
@@ -303,6 +307,7 @@ class FirstGame(arcade.Window):
         self.floor2.center_y = self.height / 1.5 + self.offset_y
         self.floor3.center_x = self.width / 0.957 + self.offset_x
         self.floor3.center_y = self.height / 2.6 + self.offset_y
+
         # self.aristacratic.center_x = self.width / 30 + self.offset_x
         # self.aristacratic.center_y = self.height / 2 + self.offset_y
         # self.fisryk.center_x = self.width / 30 + self.offset_x
@@ -326,11 +331,14 @@ class FirstGame(arcade.Window):
         # self.Izaack.center_x = self.width / 30 + self.offset_x
         # self.Izaack.center_y = self.height / 2 + self.offset_y
 
-        # self.humans[0].update()
-        # self.humans[0].move_to_center()
-        # self.humans[0].center_y = self.height // 2 + self.offset_y
-        # self.humans[0].center_x = self.humans[0].center_x + self.offset_x
-        # print(self.humans[0].center_x)
+        # if time.time() - self.cooldown_moving >= 3 and self.character_moving:
+        #     self.humans[0].update()
+        #     self.humans[0].move_to_center()
+        #     # self.humans[0].center_y = self.height // 2 + self.offset_y
+        #     # self.humans[0].center_x = self.humans[0].center_x + self.offset_x
+        #     print(self.humans[0].center_x)
+        # if self.character_moving:
+        #     pass
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.ESCAPE:
