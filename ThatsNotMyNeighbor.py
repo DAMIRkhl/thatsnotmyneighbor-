@@ -11,7 +11,7 @@ from cursor import *
 
 class FirstGame(arcade.Window):
     def __init__(self, width, height):
-        super().__init__(width, height, fullscreen=True)
+        super().__init__(width, height, fullscreen=False)
         self.set_mouse_visible(False)
         # textures
         self.BG = arcade.load_texture("Office.png")
@@ -45,8 +45,8 @@ class FirstGame(arcade.Window):
         self.max_offset_y = 200
 
         # sounds
-        hurt_sound = arcade.load_sound("bg_sounds.wav")
-        arcade.play_sound(hurt_sound)
+        hurt_sound = arcade.load_sound("bg_sounds.mp3")
+        arcade.play_sound(hurt_sound,volume=10)
 
         # timers
         self.cooldown_moving = time.time()
